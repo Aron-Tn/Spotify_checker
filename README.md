@@ -11,7 +11,7 @@ Spotify Email Valid Checker 2020 (Without Proxies)
 
 Installation : 
 ------
-         
+ - U should Have Firefox !        
     
  - Windows Users ?
    
