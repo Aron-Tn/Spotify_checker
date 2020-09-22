@@ -4,14 +4,15 @@ import zipfile
 import colorama
 import urllib.request,shutil,os
 import platform
-import urllib.request
-import tarfile
 import string,requests
 import webbrowser,random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+os.system("title Spotify Email Valid Checker V2 By ARON-TN")
+va=0
+inva=0
 print("""\033[93m
     ___                         _______   __
    /   |  _________  ____      /_  __/ | / /
@@ -23,30 +24,21 @@ print("""\033[93m
  {a}Coded By {b}: {a}ARON-TN
 """.format(a="\033[92m", b="\033[94m"))
 print('{b}[+] {a}download files .....'.format(a="\033[92m", b="\033[94m"))
-if os.name=='nt':
-   if platform.architecture()[0] == "32bit" :
-    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win64.zip'
-    file_name = 'required.zip'
-   elif platform.architecture()[0] == "64bit" :
-    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win32.zip'
-    file_name = 'required.zip'
-else:
-    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz'
-if os.name=='nt':
- with urllib.request.urlopen(url) as response, open(file_name, 'wb') as out_file:
+if platform.architecture()[0] == "32bit" :
+ url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win64.zip'
+elif platform.architecture()[0] == "64bit" :
+ url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win32.zip'
+file_name = 'required.zip'
+with urllib.request.urlopen(url) as response, open(file_name, 'wb') as out_file:
     shutil.copyfileobj(response, out_file)
     with zipfile.ZipFile(file_name) as zf:
         zf.extractall()
- with zipfile.ZipFile(file_name, 'r') as zip_ref:
+with zipfile.ZipFile(file_name, 'r') as zip_ref:
     zip_ref.extractall()
- os.remove(file_name)
-else:
- thetarfile = url
- ftpstream = urllib.request.urlopen(thetarfile)
- thetarfile = tarfile.open(fileobj=ftpstream, mode="r|gz")
- thetarfile.extractall()
+os.remove(file_name)
 print('{b}[+] {a}Done .'.format(a="\033[92m", b="\033[94m"))
 parpiro=input('{b}[+] {a}Your List : '.format(a="\033[92m", b="\033[94m"))
+os.system("title Spotify Email Valid Checker V2 By ARON-TN VALID : "+str(va)+" - INVALID : "+str(inva))
 letters = string.ascii_lowercase
 NAME=''.join(random.choice(letters) for i in range(4))
 amm='Bot'+''.join(random.choice(letters) for i in range(6))+'@aron.tn'
@@ -86,7 +78,10 @@ with open(parpiro, "rb") as f:
  passw = WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.ID, "login-password")))
  passw.clear()
  passw.send_keys('amir23456@')
- WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/form/div[3]/div[2]/button'))).click()
+ try:
+   WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/form/div[3]/div[2]/button'))).click()
+ except:
+   WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="login-button"]'))).click()
  time.sleep(3)
  amir=browser.page_source
  if 'Incorrect username or password.' in amir:
@@ -99,8 +94,12 @@ with open(parpiro, "rb") as f:
   passw = WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.ID, "login-password")))
   passw.clear()
   passw.send_keys(str(elpass))
-  WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/form/div[3]/div[2]/button'))).click()
+  try:
+   WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/form/div[3]/div[2]/button'))).click()
+  except:
+   WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="login-button"]'))).click()
   time.sleep(3)
+ time.sleep(3)
  WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div/div/div[2]/div[3]/div[2]/div/article[1]/div/a'))).click()
  WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div[4]/div/div[3]/footer/nav/div[4]/a'))).click()
  WebDriverWait(browser, 5).until(ec.visibility_of_element_located((By.XPATH, '/html/body/div[2]/div[2]/ul/li[87]/a/div/div[2]'))).click()
@@ -118,11 +117,15 @@ with open(parpiro, "rb") as f:
     time.sleep(1)
     page_source = browser.page_source
     if "We're sorry, that email is taken." in page_source :
+     va=va+1
+     os.system("title Spotify Email Valid Checker V2 By ARON-TN VALID : "+str(va)+" - INVALID : "+str(inva))
      print('{t}[+] '.format(t='\033[92m')+email+' ===> valid')
      with open("validSpotify.txt", "a+") as wrong:
       wrong.write(email+"\n")
      pass
     else:
+     inva=inva+1
+     os.system("title Spotify Email Valid Checker V2 By ARON-TN VALID : "+str(va)+" - INVALID : "+str(inva))
      print('{k}[-] '.format(k='\033[91m')+email+' ===> invalid')
      with open("InvalidSpotify.txt", "a+") as wrong:
       wrong.write(email+"\n")
