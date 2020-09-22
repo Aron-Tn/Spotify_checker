@@ -24,18 +24,28 @@ print("""\033[93m
  {a}Coded By {b}: {a}ARON-TN
 """.format(a="\033[92m", b="\033[94m"))
 print('{b}[+] {a}download files .....'.format(a="\033[92m", b="\033[94m"))
-if platform.architecture()[0] == "32bit" :
- url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win64.zip'
-elif platform.architecture()[0] == "64bit" :
- url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win32.zip'
-file_name = 'required.zip'
-with urllib.request.urlopen(url) as response, open(file_name, 'wb') as out_file:
+if os.name=='nt':
+   if platform.architecture()[0] == "32bit" :
+    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win64.zip'
+    file_name = 'required.zip'
+   elif platform.architecture()[0] == "64bit" :
+    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win32.zip'
+    file_name = 'required.zip'
+else:
+    url = 'https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz'
+if os.name=='nt':
+ with urllib.request.urlopen(url) as response, open(file_name, 'wb') as out_file:
     shutil.copyfileobj(response, out_file)
     with zipfile.ZipFile(file_name) as zf:
         zf.extractall()
-with zipfile.ZipFile(file_name, 'r') as zip_ref:
+ with zipfile.ZipFile(file_name, 'r') as zip_ref:
     zip_ref.extractall()
-os.remove(file_name)
+ os.remove(file_name)
+else:
+ thetarfile = url
+ ftpstream = urllib.request.urlopen(thetarfile)
+ thetarfile = tarfile.open(fileobj=ftpstream, mode="r|gz")
+ thetarfile.extractall()
 print('{b}[+] {a}Done .'.format(a="\033[92m", b="\033[94m"))
 parpiro=input('{b}[+] {a}Your List : '.format(a="\033[92m", b="\033[94m"))
 os.system("title Spotify Email Valid Checker V2 By ARON-TN VALID : "+str(va)+" - INVALID : "+str(inva))
